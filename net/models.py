@@ -52,6 +52,11 @@ class Backbone_nFC_Id(nn.Module):
             model_ft.fc = nn.Sequential()
             self.features = model_ft
             self.num_ftrs = 2048
+        elif 'densenet' in self.backbone_name and '169' in self.backbone_name:
+            model_ft.features.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+            model_ft.fc = nn.Sequential()
+            self.features = model_ft.features
+            self.num_ftrs = 1664
         elif 'densenet' in self.backbone_name:
             model_ft.features.avgpool = nn.AdaptiveAvgPool2d((1, 1))
             model_ft.fc = nn.Sequential()
