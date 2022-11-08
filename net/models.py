@@ -28,7 +28,7 @@ class Backbone_nFC(nn.Module):
             raise NotImplementedError
         
         for c in range(self.class_num):
-            self.__setattr__('class_%d' % c, ClassBlock(input_dim=self.num_ftrs, class_num=1, activ='softmax') )
+            self.__setattr__('class_%d' % c, ClassBlock(input_dim=self.num_ftrs, class_num=1, activ='sigmoid') )
 
     def forward(self, x):
         x = self.features(x)
@@ -69,7 +69,7 @@ class Backbone_nFC_Id(nn.Module):
             if c == self.class_num:
                 self.__setattr__('class_%d' % c, ClassBlock(self.num_ftrs, class_num=self.id_num, activ='none'))
             else:
-                self.__setattr__('class_%d' % c, ClassBlock(self.num_ftrs, class_num=1, activ='softmax'))
+                self.__setattr__('class_%d' % c, ClassBlock(self.num_ftrs, class_num=1, activ='sigmoid'))
 
     def forward(self, x):
         x = self.features(x)
